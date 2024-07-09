@@ -1,0 +1,31 @@
+package components
+
+import (
+	"fmt"
+	"github.com/vishal21121/movie-stream-app/internals/types"
+	"strconv"
+)
+
+templ MovieList(movieList []types.MovieInfo) {
+	<div class="flex justify-center gap-4 p-4">
+		for _,item := range movieList {
+			<div class="card bg-base-100 w-96 shadow-xl" id={ strconv.Itoa(item.ID) }>
+				<figure>
+					if item.PosterPath != nil {
+						<img
+							src={ fmt.Sprintf("https://image.tmdb.org/t/p/w400%v", *item.PosterPath) }
+							alt={ item.Title }
+						/>
+					}
+				</figure>
+				<div class="card-body">
+					<h2 class="card-title">{ item.Title }</h2>
+					<p>{ item.Overview }</p>
+					<div class="card-actions justify-end">
+						<button class="btn btn-primary">Watch</button>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+}
